@@ -3,9 +3,8 @@ import time
 import requests
 import hashlib
 
-num = ""
 
-def getpw(pwd):
+def getpw(pwd):  # 加密规则
     pwd = pwd.encode(encoding='utf-8')
     m = hashlib.md5()
     m.update(pwd)
@@ -20,9 +19,8 @@ def getpw(pwd):
     return pwd
 
 
-def sign_up(username, password):
-    global num
-    password = getpw(password)
+def sign_up(username, password):  # 登录
+    password = getpw(password)  # 获得加密后的密码
     login_url = "http://xggl.hnie.edu.cn/website/login"
     params = {
         'uname': username,
@@ -35,17 +33,16 @@ def sign_up(username, password):
         res = res.json()
         index_url = res['goto2']
         print("密码正确，成功登陆")
-        num = index_url[-13:]
+        num = index_url[-13:]  # 获得时间戳
     except Exception as e:
         if 'error' in res:
             print(res['msg'])
         return None
 
-    return cookies
+    return [cookies, num]
 
 
-def get_last(cookies):
-    global num
+def get_last(cookies, num):  # 获得上一次打卡信息
     try:
         last_url = "http://xggl.hnie.edu.cn/content/student/temp/zzdk/lastone"
         params = {
@@ -58,8 +55,7 @@ def get_last(cookies):
     return res
 
 
-def daka(last_json, cookies):
-    global num
+def daka(last_json, cookies, num):  # 打卡
     daka_url = "http://xggl.hnie.edu.cn/content/student/temp/zzdk?_t_s_=" + num
 
     try:
@@ -72,6 +68,7 @@ def daka(last_json, cookies):
             jzdXian = None
         else:
             jzdXian = last_json['jzdXian']['dm']
+
         params = {
             'zdjg': "",
             'yczk1': last_json['yczk']['mc'],  # 无症状
@@ -127,23 +124,23 @@ def daka(last_json, cookies):
     return res
 
 
-def yiban_daka(username, password, name):
-    # username = "202003020118"
-    # password = "121194"
-    print("现在打卡的是：" + name + " " + username + "  " + password)
+def yiban_daka(username, password):
+    print("现在打卡的是：" + username + "  " + password)
 
-    cookies = sign_up(username, password)
-    if not cookies:
+    res = sign_up(username, password)  # 登录
+    cookies = res[0]
+    num = res[1]
+    if not cookies or not num:
         print("")
         time.sleep(2)
         return
 
-    last_json = get_last(cookies)
+    last_json = get_last(cookies, num)
     if not last_json:
         print("")
         return
 
-    res = daka(last_json, cookies)
+    res = daka(last_json, cookies, num)
     if not res:
         print("")
         return
