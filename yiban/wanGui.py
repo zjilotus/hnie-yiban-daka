@@ -88,7 +88,7 @@ class wanGui:
 
 
 if __name__ == '__main__':
-    wg = wanGui("202003020131", "123014")
+    wg = wanGui("", "")
     wg.sign_up()
     # print(wg.daka())
     res = wg.getDM()
