@@ -36,7 +36,7 @@ def do(name):
 
 
 def writeFile(ip):
-    file1 = open(r'E:\\Desktop\\11.bat', 'w', encoding='ansi')
+    file1 = open(r'modifyIp.bat', 'w', encoding='ansi')
     # 打开文件，w表示清空后写入，a表示append，追加的意思
     str = 'netsh interface ip set address name="以太网" source=static addr=' + ip + ' mask=255.255.255.0 gateway=10.0.38.1'
     file1.write(str)
@@ -58,5 +58,5 @@ if __name__ == '__main__':
     #     writeFile(ip)
     #     os.system("E:\\Desktop\\11.bat")
     writeFile("10.0.38.9")
-    os.system("E:\\Desktop\\11.bat")
+    os.system("modifyIp.bat")
 

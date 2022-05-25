@@ -1,0 +1,1 @@
+netsh interface ip set address name="ÒÔÌ«Íø" source=static addr=10.0.38.9 mask=255.255.255.0 gateway=10.0.38.1
