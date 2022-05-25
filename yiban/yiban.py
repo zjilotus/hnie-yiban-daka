@@ -25,7 +25,7 @@ class yiban:
 
     def sign_up(self):  # 登录
         self.getpw()
-        login_url = "http://xggl.hnie.edu.cn/website/login"
+        login_url = "http://59.71.0.224/website/login"
         params = {
             'uname': self.username,
             'pd_mm': self.password,
@@ -48,7 +48,7 @@ class yiban:
 
     def get_last(self):  # 获得上一次打卡信息
         try:
-            last_url = "http://xggl.hnie.edu.cn/content/student/temp/zzdk/lastone"
+            last_url = "http://59.71.0.224/content/student/temp/zzdk/lastone"
             params = {
                 '_t_s_': self.num,
             }
@@ -59,7 +59,7 @@ class yiban:
         return res
 
     def daka(self, last_json):  # 打卡
-        daka_url = "http://xggl.hnie.edu.cn/content/student/temp/zzdk?_t_s_=" + self.num
+        daka_url = "http://59.71.0.224/content/student/temp/zzdk?_t_s_=" + self.num
 
         try:
             if last_json['sfzx'] == 1:  # 是否在学校
@@ -113,6 +113,7 @@ class yiban:
                 'dm': "",
                 'dkly': last_json['dkly'],  # baidu or yiban
                 'dkdz': last_json['dkdz'],  # 打卡地址 "湖南省岳阳市岳阳楼区金鹗中路135号"
+                'dkdzZb': "112.944,27.8296",
                 'dkd': last_json['dkd'],  # 打卡地 "湖南省岳阳市"
                 'bz': last_json['bz'],  # 备注
                 'brStzk1': last_json['brStzk']['mc'],  # 身体健康、无异常

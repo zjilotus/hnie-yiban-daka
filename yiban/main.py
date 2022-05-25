@@ -1,3 +1,4 @@
+import os
 import time
 
 from yiban import yiban
@@ -34,11 +35,28 @@ def do(name):
     print("")
 
 
-if __name__ == '__main__':
-    for name in names:
-        if name['userid'] == "" or name['pwd'] == "":
-            break
-        do(name)
+def writeFile(ip):
+    file1 = open(r'E:\\Desktop\\11.bat', 'w', encoding='ansi')
+    # 打开文件，w表示清空后写入，a表示append，追加的意思
+    str = 'netsh interface ip set address name="以太网" source=static addr=' + ip + ' mask=255.255.255.0 gateway=10.0.38.1'
+    file1.write(str)
+    # 写入内容
+    file1.close()
+    # 关闭文件
 
-        time.sleep(1)
+
+if __name__ == '__main__':
+    # for name in names:
+    #     if name['userid'] == "" or name['pwd'] == "":
+    #         break
+    #     do(name)
+
+        # time.sleep(1)
+
+    # for i in range(40, 90):
+    #     ip = "10.0.38." + str(i)
+    #     writeFile(ip)
+    #     os.system("E:\\Desktop\\11.bat")
+    writeFile("10.0.38.9")
+    os.system("E:\\Desktop\\11.bat")
 
