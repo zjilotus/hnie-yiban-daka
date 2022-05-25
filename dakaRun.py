@@ -1,8 +1,8 @@
 import os
 import time
 
-from yiban import yiban
-from names import names
+from yiban.yiban import yiban
+from yiban.names import names
 
 
 def do(name):
