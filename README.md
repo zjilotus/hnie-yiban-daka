@@ -14,8 +14,8 @@ HNIE易班打卡项目。
 
 ### 使用说明
 
-1. 在 name.py 中按格式添加学号和密码
-2. 运行 main.py
+1. 在 yiban.names.py 中按格式添加学号和密码
+2. 运行 dakaRun.py
 
 本项目运行网址：
 https://daka.ilotus.top/hnie/
